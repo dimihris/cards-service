@@ -10,4 +10,6 @@ public interface CardService {
 
     boolean updateCard(CardDto cardsDto);
 
+    boolean deleteCard(String mobileNumber);
+
 }

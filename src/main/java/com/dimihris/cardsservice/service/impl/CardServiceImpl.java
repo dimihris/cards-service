@@ -49,6 +49,17 @@ public class CardServiceImpl implements CardService {
         return  true;
     }
 
+    @Override
+    public boolean deleteCard(String mobileNumber) {
+
+        Card cards = cardRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
+        );
+        cardRepository.deleteById(cards.getCardId());
+
+        return true;
+    }
+
     private Card createNewCard(String mobileNumber) {
         Card newCard = new Card();
         long randomCardNumber = 100000000000L + new Random().nextInt(900000000);
