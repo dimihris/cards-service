@@ -3,7 +3,7 @@ package com.dimihris.cardsservice.dto;
 import lombok.Data;
 
 @Data
-public class CardsDto {
+public class CardDto {
 
     private String mobileNumber;
 
