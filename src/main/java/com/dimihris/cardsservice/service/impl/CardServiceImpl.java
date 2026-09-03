@@ -1,8 +1,11 @@
 package com.dimihris.cardsservice.service.impl;
 
 import com.dimihris.cardsservice.constants.CardConstants;
+import com.dimihris.cardsservice.dto.CardDto;
 import com.dimihris.cardsservice.entity.Card;
 import com.dimihris.cardsservice.exception.CardAlreadyExistsException;
+import com.dimihris.cardsservice.exception.ResourceNotFoundException;
+import com.dimihris.cardsservice.mapper.CardMapper;
 import com.dimihris.cardsservice.repository.CardRepository;
 import com.dimihris.cardsservice.service.CardService;
 import lombok.AllArgsConstructor;
@@ -26,6 +29,15 @@ public class CardServiceImpl implements CardService {
         }
 
         cardRepository.save(createNewCard(mobileNumber));
+    }
+
+    @Override
+    public CardDto getCardDetails(String mobileNumber) {
+
+        Card card = cardRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
+
+        return CardMapper.mapToCardsDto(card, new CardDto());
     }
 
     private Card createNewCard(String mobileNumber) {
