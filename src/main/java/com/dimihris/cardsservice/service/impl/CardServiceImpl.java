@@ -40,6 +40,15 @@ public class CardServiceImpl implements CardService {
         return CardMapper.mapToCardsDto(card, new CardDto());
     }
 
+    @Override
+    public boolean updateCard(CardDto cardsDto) {
+        Card cards = cardRepository.findByCardNumber(cardsDto.getCardNumber()).orElseThrow(
+                () -> new ResourceNotFoundException("Card", "CardNumber", cardsDto.getCardNumber()));
+        CardMapper.mapToCards(cardsDto, cards);
+        cardRepository.save(cards);
+        return  true;
+    }
+
     private Card createNewCard(String mobileNumber) {
         Card newCard = new Card();
         long randomCardNumber = 100000000000L + new Random().nextInt(900000000);

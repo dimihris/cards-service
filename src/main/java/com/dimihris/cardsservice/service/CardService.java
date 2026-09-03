@@ -8,4 +8,6 @@ public interface CardService {
 
     CardDto getCardDetails(String mobileNumber);
 
+    boolean updateCard(CardDto cardsDto);
+
 }
