@@ -19,7 +19,7 @@ repositories {
     mavenCentral()
 }
 
-jib.to.image = "hridmitrov/${project.description}:s4"
+jib.to.image = "hridmitrov/${project.description}:s6"
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-h2console'
